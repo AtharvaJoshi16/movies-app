@@ -118,7 +118,7 @@ export const Header = () => {
     inputValue && router.push(`/search?q=${inputValue}`);
   };
   return (
-    <div className="header flex items-center p-[20px] m-0 gap-[20px]">
+    <div className="header flex max-[768px]:flex-col max-[768px]:items-start items-center p-[20px] m-0 gap-[20px]">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -150,7 +150,7 @@ export const Header = () => {
         <Input
           onChange={(e) => handleInput(e)}
           onKeyDown={(e) => handlePressEnter(e)}
-          className="w-[400px]"
+          className="max-[768px]:w-[200px] w-[400px]"
           placeholder="Search for a movie, tv series or a keyword..."
         />
         <Button onClick={handleClick} size="icon" variant="outline">

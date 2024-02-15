@@ -66,21 +66,21 @@ export default async function MovieDetail({
     vote_average,
     vote_count,
   } = data;
-  const date = new Date(release_date ?? "");
+  const date = new Date(release_date ?? data?.first_air_date);
   const month = date.toLocaleString("default", { month: "long" });
   return (
-    <div className="mt-[40px] mb-[40px] mr-auto ml-auto lg:ml-[92px] lg:mr-[92px]">
-      <div className="flex justify-center gap-[30px] lg:gap-[80px]">
+    <div className="max-[360px]:m-[24px] max-[768px]:m-[48px] max-[1024px]:m-[92px] mt-[40px] mb-[40px] mr-auto ml-auto lg:ml-[92px] lg:mr-[92px]">
+      <div className="flex justify-center max-[768px]:flex-col gap-[30px] lg:gap-[80px]">
         <Image
           src={`${process.env.NEXT_PUBLIC_IMAGE_PATH}/${poster_path}`}
           width={400}
-          className="h-[600px] max-h-[600px]"
+          className="max-[360px]:h-[300px] max-[360px]:w-[200px] max-[768px]:h-[400px] max-[768px]:w-[300px] max-[768px]:m-auto h-[600px] max-h-[600px]"
           height={400}
           alt={`${title}`}
         />
         <div className="flex flex-col">
           <h1 className="text-4xl flex items-center gap-[25px] font-bold">
-            {original_title}
+            {original_title ?? data?.name}
             {adult && (
               <span>
                 <Image
@@ -92,8 +92,19 @@ export default async function MovieDetail({
               </span>
             )}
           </h1>
+          {!!data?.number_of_seasons && (
+            <h6 className="mt-[10px] flex items-center gap-[10px] text-slate-600">
+              {data?.number_of_seasons > 1
+                ? `${data?.number_of_seasons} Seasons`
+                : "1 Season"}
+              {"  ,"}
+              <span>{data?.number_of_episodes} episodes</span>
+            </h6>
+          )}
           <h3 className="flex gap-[10px] mt-[20px] text-xl">
-            {status === "released" ? "Releasing" : "Released"}
+            {params?.itemid[0] === "movie" &&
+              (status === "released" ? "Released" : "Releasing")}
+            {params?.itemid[0] === "tv" && "First Aired"}
             <span>{`${month} ${date.getDate()}, ${date.getFullYear()}`}</span>
           </h3>
           <div className="flex mt-[20px] items-center gap-[15px]">
