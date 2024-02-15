@@ -69,6 +69,7 @@ export default async function ListTypes({
         } = item;
         return (
           <MovieCard
+            key={`${original_title}-${id}`}
             adult={adult}
             genreIds={genre_ids}
             id={id}

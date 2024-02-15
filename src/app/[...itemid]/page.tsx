@@ -109,7 +109,14 @@ export default async function MovieDetail({
           </h3>
           <div className="flex mt-[20px] items-center gap-[15px]">
             {movieGenres?.map((genre) => {
-              return <Badge variant="destructive">{genre?.name}</Badge>;
+              return (
+                <Badge
+                  key={`${genre?.name}-${genre?.id}`}
+                  variant="destructive"
+                >
+                  {genre?.name}
+                </Badge>
+              );
             })}
           </div>
           <div className="flex mt-[40px] items-center justify-between w-[250px]">
@@ -188,7 +195,10 @@ export default async function MovieDetail({
               {!!providers?.results?.["US"]?.["buy"]?.length &&
                 providers?.results?.["US"]?.["buy"]?.map((item) => {
                   return (
-                    <Card className="w-[200px] flex items-center justify-center">
+                    <Card
+                      key={`${item?.provider_name}-${item?.provider_id}`}
+                      className="w-[200px] flex items-center justify-center"
+                    >
                       <CardHeader>
                         <Image
                           src={`${process.env.NEXT_PUBLIC_IMAGE_PATH}/${item?.logo_path}`}
@@ -219,7 +229,10 @@ export default async function MovieDetail({
             <div className="flex flex-wrap items-center gap-[30px]">
               {providers?.results?.["US"]?.["rent"]?.map((item) => {
                 return (
-                  <Card className="w-[200px] flex items-center justify-center">
+                  <Card
+                    key={`${item?.provider_name}-${item?.provider_id}`}
+                    className="w-[200px] flex items-center justify-center"
+                  >
                     <CardHeader>
                       <Image
                         src={`${process.env.NEXT_PUBLIC_IMAGE_PATH}/${item?.logo_path}`}
