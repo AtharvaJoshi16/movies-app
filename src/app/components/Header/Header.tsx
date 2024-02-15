@@ -119,38 +119,42 @@ export const Header = () => {
   };
   return (
     <div className="header flex max-[768px]:flex-col max-[768px]:items-start items-center p-[20px] m-0 gap-[20px]">
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Types</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="gap-3 p-4 md:w-[200px]">
-                {(choice === "movie" ? components : tvComponents)?.map(
-                  (item) => (
-                    <ListItem {...item} />
-                  )
-                )}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-      <Genres genres={genres} />
-      <Tabs className="ml-[30px]" defaultValue="movie">
-        <TabsList>
-          <TabsTrigger onClick={() => setTabChoice("movie")} value="movie">
-            Movies
-          </TabsTrigger>
-          <TabsTrigger onClick={() => setTabChoice("tv")} value="tv">
-            TV Shows
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-      <div className="flex items-center ml-[100px] gap-[10px]">
+      <div className="flex gap-[10px]">
+        <div className="flex gap-[20px] max-[768px]:gap-[20px]">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Types</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="gap-3 p-4 w-[220px]">
+                    {(choice === "movie" ? components : tvComponents)?.map(
+                      (item, index) => (
+                        <ListItem key={`${index}`} {...item} />
+                      )
+                    )}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          <Genres genres={genres} />
+        </div>
+        <Tabs className="max-[768px]:ml-0 ml-[30px]" defaultValue="movie">
+          <TabsList>
+            <TabsTrigger onClick={() => setTabChoice("movie")} value="movie">
+              Movies
+            </TabsTrigger>
+            <TabsTrigger onClick={() => setTabChoice("tv")} value="tv">
+              TV Shows
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+      <div className="flex w-[100%] items-center max-[768px]:justify-start max-[768px]:ml-0 ml-[100px] gap-[10px]">
         <Input
           onChange={(e) => handleInput(e)}
           onKeyDown={(e) => handlePressEnter(e)}
-          className="max-[768px]:w-[200px] w-[400px]"
+          className="max-[768px]:w-[300px] w-[400px]"
           placeholder="Search for a movie, tv series or a keyword..."
         />
         <Button onClick={handleClick} size="icon" variant="outline">
@@ -194,7 +198,7 @@ const Genres = ({ genres }: GenresProps) => {
             Genres
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="gap-3 p-4 w-[500px] grid grid-cols-3">
+            <ul className="gap-3 p-4 w-[500px] grid grid-cols-3 max-[768px]:w-[250px] max-[768px]:grid-cols-2">
               {genres?.map((item) => (
                 <li className="row-span-3" key={`${item?.name}-${item?.id}`}>
                   <Link

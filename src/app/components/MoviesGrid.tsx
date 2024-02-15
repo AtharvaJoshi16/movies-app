@@ -26,6 +26,7 @@ export const MoviesGrid = ({ data }) => {
         } = item;
         return (
           <MovieCard
+            key={`${title}-${id}`}
             adult={adult}
             genreIds={genre_ids}
             id={id}

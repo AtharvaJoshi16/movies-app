@@ -135,7 +135,9 @@ export default async function MovieDetail({
           </div>
           <p className="lg:w-[700px] mt-[40px] text-justify">{overview}</p>
           <div className="mt-[40px]">
-            <h2 className="text-2xl font-bold mb-[20px]">Produced By</h2>
+            {!!production_companies?.length && (
+              <h2 className="text-2xl font-bold mb-[20px]">Produced By</h2>
+            )}
             <div className="flex flex-wrap items-center gap-[30px]">
               {production_companies?.map((item) => {
                 return (

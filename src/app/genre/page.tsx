@@ -22,8 +22,11 @@ export default async function Genres() {
   const data = await getGenres(choice);
   return (
     <div className="flex pl-[80px] pr-[80px] pt-[20px] pb-[20px] gap-[30px] flex-wrap justify-center">
-      {data?.genres?.map((item) => (
-        <Link href={`/genre/${item?.name}-${item?.id}`}>
+      {data?.genres?.map((item, index) => (
+        <Link
+          key={`${item?.name}-${index}`}
+          href={`/genre/${item?.name}-${item?.id}`}
+        >
           <Card
             key={`${item?.name}-${item.id}`}
             className="p-[50px] w-[300px] genre-card"
