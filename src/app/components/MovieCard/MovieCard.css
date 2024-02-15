@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Playball&family=Sacramento&family=Shalimar&display=swap");
+.movie-card {
+  cursor: pointer;
+  height: auto;
+}
+
+.movie-card:hover {
+  transform: translateY(-2%);
+  transition: all 0.2s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.overview-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: justify;
+}
+
+.release-date {
+  font-size: 35px;
+  font-family: "Shalimar", cursive;
+  font-weight: bold;
+  font-style: normal;
+}

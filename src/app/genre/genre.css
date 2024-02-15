@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Playball&family=Sacramento&family=Shalimar&display=swap");
+
+.genre-card {
+  cursor: pointer;
+  border: none;
+  font-family: "Corinthia", cursive;
+  font-weight: 700;
+  font-style: normal;
+  background-image: linear-gradient(to right, #cbdbf3, #b6dcff);
+}
+.genre-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transform: scale(1.115);
+  transition: all 0.2s ease-in-out;
+}
