@@ -5,10 +5,9 @@ import styles from "./search.module.css";
 import { MoviesGrid } from "../components/MoviesGrid";
 import Image from "next/image";
 import { useContext } from "react";
-import { tabContext } from "../tabContext";
+import { Choice, tabContext } from "../tabContext";
 
-async function getMoviesBySearch(query: string) {
-  const { choice } = useContext(tabContext);
+async function getMoviesBySearch(query: string, choice: Choice) {
   const res = await axios
     .get(
       `${process.env.NEXT_PUBLIC_DOMAIN}/search/${choice}?query=${query}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
@@ -20,7 +19,8 @@ async function getMoviesBySearch(query: string) {
 
 export default async function SearchPage() {
   const query = useSearchParams().get("q");
-  const data = await getMoviesBySearch(query!);
+  const { choice } = useContext(tabContext);
+  const data = await getMoviesBySearch(query!, choice);
   if (!!data?.results?.length) {
     return <MoviesGrid data={data} />;
   }
