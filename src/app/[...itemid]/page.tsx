@@ -1,13 +1,22 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { MockVideos } from "@/mocks/videos.mock";
 import axios from "axios";
 import { Heart, ShoppingCart, Star, TicketPercent } from "lucide-react";
 import Image from "next/image";
+import { VideoPlayer } from "../components/VideoPlayer";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 async function getDetail(id: string, category: string) {
   const res = axios
     .get(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/${category}/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `${process.env.NEXT_PUBLIC_DOMAIN}/${category}/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=videos`
     )
     .then((resp) => resp.data);
   return res;
@@ -59,6 +68,7 @@ export default async function MovieDetail({
     production_countries,
     release_date,
     revenue,
+    videos,
     status,
     tagline,
     title,
@@ -175,6 +185,27 @@ export default async function MovieDetail({
           </div>
         </div>
       </div>
+      {!!videos?.results?.length && (
+        <Carousel className="w-[70%] max-[1000px]:w-[100%] m-auto mt-[40px] mb-[40px]">
+          <CarouselContent>
+            {videos?.results?.map((video) => {
+              return (
+                <CarouselItem className="basis:1/2" key={video?.id}>
+                  <VideoPlayer
+                    name={video?.name}
+                    key={video?.key}
+                    id={video?.id}
+                    youtubeID={video?.key}
+                    publishedAt={video?.published_at}
+                  />
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      )}
       <div className="mt-[40px]">
         {!!providers?.results?.["US"]?.["buy"]?.length &&
           !!providers?.results?.["US"]?.["rent"]?.length && (

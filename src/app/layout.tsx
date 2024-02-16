@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "./components/Header/Header";
 import axios from "axios";
 import { TabProvider } from "./provider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Rubik({ subsets: ["latin"] });
 
@@ -20,10 +21,17 @@ export default async function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
-        <TabProvider>
-          <Header />
-          {children}
-        </TabProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TabProvider>
+            <Header />
+            {children}
+          </TabProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

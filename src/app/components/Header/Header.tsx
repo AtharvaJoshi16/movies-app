@@ -23,6 +23,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Choice, tabContext } from "@/app/tabContext";
 import axios from "axios";
+import { ModeToggle } from "@/components/toggle";
 
 interface GenresProps {
   genres: Genre[];
@@ -150,7 +151,7 @@ export const Header = () => {
           </TabsList>
         </Tabs>
       </div>
-      <div className="flex w-[100%] items-center max-[768px]:justify-start max-[768px]:ml-0 ml-[100px] gap-[10px]">
+      <div className="flex w-[50%] items-center max-[768px]:justify-start max-[768px]:ml-0 ml-[70px] gap-[10px]">
         <Input
           onChange={(e) => handleInput(e)}
           onKeyDown={(e) => handlePressEnter(e)}
@@ -161,6 +162,7 @@ export const Header = () => {
           <Search width={17} height={17} />
         </Button>
       </div>
+      <ModeToggle />
     </div>
   );
 };
