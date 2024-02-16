@@ -151,7 +151,7 @@ export const Header = () => {
           </TabsList>
         </Tabs>
       </div>
-      <div className="flex w-[50%] items-center max-[768px]:justify-start max-[768px]:ml-0 ml-[70px] gap-[10px]">
+      <div className="flex w-[100%] items-center max-[768px]:justify-start max-[768px]:ml-0 ml-[70px] gap-[10px]">
         <Input
           onChange={(e) => handleInput(e)}
           onKeyDown={(e) => handlePressEnter(e)}
@@ -161,8 +161,8 @@ export const Header = () => {
         <Button onClick={handleClick} size="icon" variant="outline">
           <Search width={17} height={17} />
         </Button>
+        <ModeToggle />
       </div>
-      <ModeToggle />
     </div>
   );
 };

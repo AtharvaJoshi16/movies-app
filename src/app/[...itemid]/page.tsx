@@ -202,8 +202,8 @@ export default async function MovieDetail({
               );
             })}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious variant="ghost" />
+          <CarouselNext variant="ghost" />
         </Carousel>
       )}
       <div className="mt-[40px]">
