@@ -78,6 +78,14 @@ export default async function MovieDetail({
   } = data;
   const date = new Date(release_date ?? data?.first_air_date);
   const month = date.toLocaleString("default", { month: "long" });
+  const checkReleased = () => {
+    const today = new Date().getTime();
+    const releaseDate = new Date(release_date).getTime();
+    if (today > releaseDate) {
+      return true;
+    }
+    return false;
+  };
   return (
     <div className="max-[360px]:m-[24px] max-[768px]:m-[48px] max-[1024px]:m-[92px] mt-[40px] mb-[40px] mr-auto ml-auto lg:ml-[92px] lg:mr-[92px]">
       <div className="flex justify-center max-[768px]:flex-col gap-[30px] lg:gap-[80px]">
@@ -113,7 +121,7 @@ export default async function MovieDetail({
           )}
           <h3 className="flex gap-[10px] mt-[20px] text-xl">
             {params?.itemid[0] === "movie" &&
-              (status === "released" ? "Released" : "Releasing")}
+              (checkReleased() ? "Released" : "Releasing")}
             {params?.itemid[0] === "tv" && "First Aired"}
             <span>{`${month} ${date.getDate()}, ${date.getFullYear()}`}</span>
           </h3>

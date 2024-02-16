@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { MoviesGrid } from "./components/MoviesGrid";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { tabContext } from "./tabContext";
 
 async function getPopularData(category: string) {
