@@ -29,6 +29,21 @@ export default function ListTypes({
   const [data, setData] = useState<any>();
   const { choice } = useContext(tabContext);
   useEffect(() => {
+    if (
+      choice === "tv" &&
+      ["upcoming", "now_playing"].includes(path.split("/")[1])
+    ) {
+      router.push("/");
+      return;
+    }
+    if (
+      choice === "movie" &&
+      ["on_the_air", "airing_today"].includes(path.split("/")[1])
+    ) {
+      router.push("/");
+      return;
+    }
+
     async function setUpdatedOrInitialData() {
       const apiData = await getListTypes(choice, params.listtype);
       setData(apiData);
@@ -46,30 +61,7 @@ export default function ListTypes({
     copyOfData?.results?.push(...newPageData?.results);
     setData(copyOfData);
   };
-  if (
-    choice === "tv" &&
-    ["upcoming", "now_playing"].includes(path.split("/")[1])
-  ) {
-    router.push("/");
-  }
-  if (
-    choice === "movie" &&
-    ["on_the_air", "airing_today"].includes(path.split("/")[1])
-  ) {
-    router.push("/");
-  }
-  if (
-    (!["popular", "upcoming", "top_rated", "now_playing"].includes(
-      params.listtype
-    ) &&
-      choice === "movie") ||
-    (!["on_the_air", "popular", "top_rated", "airing_today"].includes(
-      params.listtype
-    ) &&
-      choice === "tv")
-  ) {
-    return notFound();
-  }
+
   return (
     <div className="flex flex-col mb-[40px]">
       <div className="flex justify-center flex-row flex-wrap gap-[30px] p-[30px]">
